@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VTRL - Python Browser Test</title>
+    <title>Khan's W Free Optimization Tool</title>
     <style>
         * {
             margin: 0;
@@ -12,485 +12,662 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
             color: #ffffff;
-            min-height: 100vh;
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
-        
-        .hero-section {
-            text-align: center;
-            padding: 80px 0;
-            background: linear-gradient(45deg, #0f0f23, #1a1a2e);
-            border-radius: 20px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-        
-        .hero-title {
-            font-size: 4rem;
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #00d4ff, #ff007f, #00ff88);
-            background-size: 200% 200%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite;
-            margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
+        }
+
+        /* Alternative: Logo only (no text) */
+        .logo-image-only {
+            height: 45px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
         .hero-subtitle {
             font-size: 1.5rem;
-            color: #00d4ff;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            color: #cccccc;
+            color: #a0a0a0;
             margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        .fps-counter {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-        
-        .fps-display {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-        
-        .fps-label {
-            color: #888;
-            font-size: 1rem;
-            margin-bottom: 10px;
-        }
-        
-        .fps-number {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-        
+
         .cta-button {
-            background: linear-gradient(45deg, #00d4ff, #ff007f);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px 40px;
+            padding: 16px 32px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
-        
+
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
-        
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #ffffff;
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin: 60px 0;
         }
-        
+
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 100%);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px 30px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
-        
+
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(0, 212, 255, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
         }
-        
+
         .feature-icon {
-            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
             margin-bottom: 20px;
-            display: block;
         }
-        
+
         .feature-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: #00d4ff;
+            color: #ffffff;
             margin-bottom: 15px;
         }
-        
+
         .feature-description {
-            color: #cccccc;
+            color: #a0a0a0;
             line-height: 1.6;
         }
-        
-        .nav {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px 0;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 60px 0;
         }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
+
+        .download-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .download-subtitle {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .download-btn.secondary {
+            background: transparent;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            color: #667eea;
+        }
+
+        .download-btn.secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
             display: flex;
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
         }
-        
-        .nav a {
-            color: #cccccc;
+
+        .footer-links a {
+            color: #a0a0a0;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            transition: color 0.3s ease;
         }
-        
-        .nav a:hover {
-            background: rgba(0, 212, 255, 0.2);
-            color: #00d4ff;
-            transform: translateY(-2px);
+
+        .footer-links a:hover {
+            color: #667eea;
         }
-        
-        .form-section {
-            background: rgba(255, 255, 255, 0.05);
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Interactive elements */
+        .interactive-demo {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             margin: 40px 0;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #00d4ff;
-            margin-bottom: 30px;
             text-align: center;
         }
-        
-        .form-group {
+
+        .demo-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #00d4ff;
-            font-weight: 600;
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 1rem;
+
+        .demo-btn {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-        
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-        
-        input::placeholder, textarea::placeholder {
-            color: #888;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        th {
-            background: rgba(0, 212, 255, 0.2);
-            color: #00d4ff;
-            font-weight: 700;
-        }
-        
-        .status-complete { color: #00ff88; }
-        .status-progress { color: #ffaa00; }
-        .status-planned { color: #888; }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .alert {
-            background: linear-gradient(45deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
-            color: #00ff88;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            margin: 20px 0;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        #js-output {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 20px 0;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .demo-btn:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateY(-1px);
         }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <div class="nav-container">
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="#download">Download</a>
-            <a href="#about">About</a>
-            <a href="https://www.python.org" target="_blank">Python.org</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">Khan's W Tweaking</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
+    </header>
 
-    <div class="container">
-        <div class="hero-section">
-            <h1 class="hero-title">VTRL</h1>
-            <div class="hero-subtitle">Your PC F***ing Sucks.</div>
-            <div class="tagline">Boost FPS, decrease response times, eliminate ping and get rid of crap.</div>
-            
-            <div class="fps-counter">
-                <div class="fps-display">
-                    <div class="fps-label">Before:</div>
-                    <div class="fps-number" id="fps-before">0</div>
-                    <div class="fps-label">FPS</div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Optimize Your PC Performance</h1>
+            <p class="hero-subtitle">Khan's W Tweaking Utility provides advanced system optimizations to boost your FPS, reduce latency, and unlock your PC's true gaming potential.</p>
+            <a href="#download" class="cta-button">
+                <span>⬇️</span>
+                Download KWTW
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number" id="users-count">50,000+</span>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="fps-boost">+60</span>
+                <div class="stat-label">Average FPS Boost</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="latency-reduction">-25ms</span>
+                <div class="stat-label">Latency Reduction</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="satisfaction">98%</span>
+                <div class="stat-label">User Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="container">
+        <div class="interactive-demo">
+            <h3>Performance Demo</h3>
+            <p>See the difference KWTW makes to your system performance</p>
+            <div class="stats" style="margin: 30px 0;">
+                <div class="stat-card">
+                    <span class="stat-number" id="demo-before">45</span>
+                    <div class="stat-label">FPS Before</div>
                 </div>
-                <div class="fps-display">
-                    <div class="fps-label">After:</div>
-                    <div class="fps-number" id="fps-after">0</div>
-                    <div class="fps-label">FPS</div>
+                <div class="stat-card">
+                    <span class="stat-number" id="demo-after">45</span>
+                    <div class="stat-label">FPS After</div>
                 </div>
             </div>
-            
-            <a href="#download" class="cta-button">Download VTRL</a>
-        </div>
-
-        <div class="alert">
-            <strong>🚀 Browser Test Active!</strong> If you can see this styled page with animations, your Python browser is handling advanced CSS correctly!
-        </div>
-
-        <div class="section-title">All-In-One Utility</div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <span class="feature-icon">🎮</span>
-                <div class="feature-title">General Tweaks</div>
-                <div class="feature-description">Dozens of optimizations to enhance overall system performance and unlock your PC's true potential.</div>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">⚡</span>
-                <div class="feature-title">Latency Optimization</div>
-                <div class="feature-description">Reduce input lag and system response times for a smoother, more responsive gaming experience.</div>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">🌐</span>
-                <div class="feature-title">Network Enhancements</div>
-                <div class="feature-description">Optimize your network settings for lower ping and better connectivity in online games.</div>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">⚙️</span>
-                <div class="feature-title">Power Plan Configurator</div>
-                <div class="feature-description">Create and apply custom power plans to balance performance and energy efficiency.</div>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">🧹</span>
-                <div class="feature-title">System Cleaner</div>
-                <div class="feature-description">Remove unnecessary files and optimize storage for improved system responsiveness.</div>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">🗑️</span>
-                <div class="feature-title">Debloat Utility</div>
-                <div class="feature-description">Remove unwanted bloatware and organize your system for peak performance.</div>
+            <div class="demo-controls">
+                <button class="demo-btn" onclick="simulateOptimization()">🚀 Run Optimization</button>
+                <button class="demo-btn" onclick="resetDemo()">🔄 Reset Demo</button>
             </div>
         </div>
+    </section>
 
-        <div class="section-title">Interactive Test Elements</div>
-        <div style="text-align: center; margin: 30px 0;">
-            <button class="cta-button" onclick="simulateBoost()" style="margin: 0 10px;">Simulate FPS Boost</button>
-            <button class="cta-button" onclick="resetCounters()" style="margin: 0 10px;">Reset Counters</button>
-        </div>
-
-        <div class="form-section">
-            <div class="section-title">Browser Testing Form</div>
-            <form onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Username:</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your gaming username">
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Game Optimization</h3>
+                    <p class="feature-description">Automatically detect and optimize settings for over 1000+ popular games to maximize performance.</p>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">System Tweaks</h3>
+                    <p class="feature-description">Apply dozens of proven registry and system optimizations to reduce latency and boost FPS.</p>
                 </div>
                 
-                <div class="form-group">
-                    <label for="message">Performance Feedback:</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your system's performance..."></textarea>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Network Optimization</h3>
+                    <p class="feature-description">Optimize TCP settings, DNS configuration, and network adapters for lower ping and stable connection.</p>
                 </div>
                 
-                <div style="text-align: center;">
-                    <button type="submit" class="cta-button">Submit Feedback</button>
+                <div class="feature-card">
+                    <div class="feature-icon">🗑️</div>
+                    <h3 class="feature-title">System Cleanup</h3>
+                    <p class="feature-description">Remove bloatware, temporary files, and unnecessary processes that slow down your system.</p>
                 </div>
-            </form>
-        </div>
-
-        <div class="section-title">Browser Feature Status</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Browser Component</th>
-                    <th>Status</th>
-                    <th>Performance Impact</th>
-                    <th>Priority</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>HTML Parsing Engine</td>
-                    <td class="status-complete">✅ Optimized</td>
-                    <td>+60 FPS</td>
-                    <td>Critical</td>
-                </tr>
-                <tr>
-                    <td>CSS Rendering Pipeline</td>
-                    <td class="status-progress">🔄 Boosting</td>
-                    <td>+45 FPS</td>
-                    <td>Critical</td>
-                </tr>
-                <tr>
-                    <td>JavaScript V8 Engine</td>
-                    <td class="status-planned">⏳ Queued</td>
-                    <td>+30 FPS</td>
-                    <td>High</td>
-                </tr>
-                <tr>
-                    <td>Image Loading Cache</td>
-                    <td class="status-complete">✅ Optimized</td>
-                    <td>+25 FPS</td>
-                    <td>Medium</td>
-                </tr>
-                <tr>
-                    <td>Network Optimization</td>
-                    <td class="status-progress">🔄 Boosting</td>
-                    <td>-50ms Latency</td>
-                    <td>High</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="section-title" id="test">Python Browser Dev Stack</div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <span class="feature-icon">🐍</span>
-                <div class="feature-title">Core Framework</div>
-                <div class="feature-description">PyQt6/PySide6 for maximum performance with native rendering capabilities and GPU acceleration support.</div>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">🌐</span>
-                <div class="feature-title">Web Engine</div>
-                <div class="feature-description">QWebEngineView with Chromium backend for modern web standards and JavaScript execution.</div>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">⚡</span>
-                <div class="feature-title">Performance Tweaks</div>
-                <div class="feature-description">Custom CSS injection, ad blocking, and resource optimization for lightning-fast page loads.</div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3 class="feature-title">Power Management</h3>
+                    <p class="feature-description">Create custom power plans optimized for gaming performance with intelligent CPU and GPU scaling.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Real-time Monitoring</h3>
+                    <p class="feature-description">Monitor FPS, temperatures, and system resources in real-time with customizable overlays.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="section-title">Real-time Performance Monitor</div>
-        <div id="js-output">
-            <span style="color: #888;">Initializing performance monitoring...</span>
+    <!-- Download Section -->
+    <section class="container" id="download">
+        <div class="download-section">
+            <h2 class="download-title">Ready to Optimize?</h2>
+            <p class="download-subtitle">Download Khan's W Free Tweaking Utility and experience the difference in your gaming performance</p>
+            <div class="download-buttons">
+                <a href="#" class="download-btn" onclick="startDownload()">
+                    <span>⬇️</span>
+                    Download for Windows
+                </a>
+                <a href="#" class="download-btn secondary">
+                    <span>📖</span>
+                    User Guide
+                </a>
+            </div>
+            <p style="color: #666; margin-top: 20px; font-size: 0.9rem;">
+                Windows 10/11 • 64-bit • Free to use
+            </p>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 KWTU. Made for gamers, by gamers.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#support">Support</a>
+                <a href="#github">GitHub</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        function changeColor() {
-            const colors = ['#f4f4f4', '#e8f4f8', '#f0f8e8', '#f8f0e8', '#f8e8f0'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            document.body.style.backgroundColor = randomColor;
-        }
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            document.getElementById('js-output').innerHTML = `
-                <strong>Form Submitted!</strong><br>
-                Name: ${name}<br>
-                Email: ${email}<br>
-                Message: ${message}
-            `;
-        }
-
-        // Test basic DOM manipulation
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('js-output').innerHTML = 
-                '<strong>JavaScript is working!</strong> DOM loaded successfully.';
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.98)';
+                header.style.borderBottom = '1px solid rgba(102, 126, 234, 0.2)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+                header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Interactive demo functions
+        function simulateOptimization() {
+            const beforeElement = document.getElementById('demo-before');
+            const afterElement = document.getElementById('demo-after');
+            
+            let currentFPS = 45;
+            let targetFPS = 105;
+            
+            const interval = setInterval(() => {
+                if (currentFPS < targetFPS) {
+                    currentFPS += Math.floor(Math.random() * 5) + 1;
+                    afterElement.textContent = Math.min(currentFPS, targetFPS);
+                } else {
+                    clearInterval(interval);
+                    afterElement.style.color = '#00ff88';
+                    
+                    // Add success message
+                    setTimeout(() => {
+                        const demo = document.querySelector('.interactive-demo');
+                        const successMsg = document.createElement('div');
+                        successMsg.innerHTML = '<p style="color: #00ff88; margin-top: 20px; font-weight: 600;">🎉 Optimization Complete! +60 FPS gained!</p>';
+                        demo.appendChild(successMsg);
+                        
+                        setTimeout(() => {
+                            successMsg.remove();
+                        }, 3000);
+                    }, 500);
+                }
+            }, 100);
+        }
+
+        function resetDemo() {
+            const beforeElement = document.getElementById('demo-before');
+            const afterElement = document.getElementById('demo-after');
+            
+            beforeElement.textContent = '45';
+            afterElement.textContent = '45';
+            afterElement.style.color = '#667eea';
+        }
+
+        function startDownload() {
+            // Simulate download
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<span>⏳</span> Preparing Download...';
+            btn.style.background = 'rgba(102, 126, 234, 0.5)';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span>✅</span> Download Started!';
+                btn.style.background = 'linear-gradient(135deg, #00ff88 0%, #00cc6a 100%)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                }, 2000);
+            }, 1500);
+        }
+
+        // Animate stats on page load
+        function animateStats() {
+            const stats = [
+                { element: document.getElementById('users-count'), target: 50000, suffix: '+' },
+                { element: document.getElementById('fps-boost'), target: 60, prefix: '+' },
+                { element: document.getElementById('latency-reduction'), target: -25, suffix: 'ms' },
+                { element: document.getElementById('satisfaction'), target: 98, suffix: '%' }
+            ];
+
+            stats.forEach(stat => {
+                let current = 0;
+                const increment = stat.target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if ((increment > 0 && current >= stat.target) || (increment < 0 && current <= stat.target)) {
+                        clearInterval(timer);
+                        current = stat.target;
+                    }
+                    
+                    const prefix = stat.prefix || '';
+                    const suffix = stat.suffix || '';
+                    stat.element.textContent = prefix + Math.floor(Math.abs(current)).toLocaleString() + suffix;
+                }, 50);
+            });
+        }
+
+        // Run animations when page loads
+        window.addEventListener('load', animateStats);
     </script>
-    
 </body>
 </html>
